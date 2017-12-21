@@ -7,7 +7,7 @@ def run(lines):
 		line = line.strip()
 		r, op, op_val, _, comp_r, comp, comp_val = line.split(' ')
 
-		comp_r_val = register.get(comp_r)
+		comp_r_val = register[comp_r]
 		comp_str = "{} {} {}".format(comp_r_val, comp, comp_val)
 		if eval(comp_str):
 			if op == 'inc':
@@ -17,14 +17,10 @@ def run(lines):
 			else:
 				assert False, "op not found"
 
-	print register
 	return max(register.values())
-
-
 
 
 if __name__ == "__main__":
 	with open("input.txt") as f:
 		lines = f.readlines()
 		print run(lines)
-
