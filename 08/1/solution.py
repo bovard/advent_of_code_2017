@@ -5,17 +5,15 @@ def run(lines):
 	register = defaultdict(int)
 	for line in lines:
 		line = line.strip()
-		parts = line.split(' ')
-		assert len(parts) == 7
-		assert parts[3] == 'if'
+		r, op, op_val, _, comp_r, comp, comp_val = line.split(' ')
 
-		con_val = register.get(parts[4])
-		con_str = "{} {} {}".format(con_val, parts[5], int(parts[6]))
-		if eval(con_str):
-			if parts[1] == 'inc':
-				register[parts[0]] += int(parts[2])
-			elif parts[1] == 'dec':
-				register[parts[0]] -= int(parts[2])
+		comp_r_val = register.get(comp_r)
+		comp_str = "{} {} {}".format(comp_r_val, comp, comp_val)
+		if eval(comp_str):
+			if op == 'inc':
+				register[r] += int(op_val)
+			elif op == 'dec':
+				register[r] -= int(op_val)
 			else:
 				assert False, "op not found"
 
